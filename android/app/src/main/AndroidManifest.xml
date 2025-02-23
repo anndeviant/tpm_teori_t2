@@ -1,6 +1,6 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android">
     <application
-        android:label="tpm_tugas_2"
+        android:label="tpm_teori_t2"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
         <activity
