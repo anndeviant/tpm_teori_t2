@@ -7,6 +7,7 @@ class Login extends StatelessWidget {
   Widget build(BuildContext context) {
     return SafeArea(
         child: Scaffold(
+      backgroundColor: Color(0xFFFFF9EF),
       resizeToAvoidBottomInset: true,
       body: Container(
         margin: EdgeInsets.symmetric(horizontal: 24),
