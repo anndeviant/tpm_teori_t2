@@ -5,7 +5,8 @@ class Profiles extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
+    return SafeArea(
+        child: Padding(
       padding: const EdgeInsets.all(16.0),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -14,7 +15,7 @@ class Profiles extends StatelessWidget {
             'Data Kelompok, NakaTachi!\nTPM IF - D',
             style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
           ),
-          const Divider(thickness: 2),
+          const Divider(thickness: 2, color: Colors.black),
           const SizedBox(height: 8),
           Center(
             child: Image.asset(
@@ -25,7 +26,7 @@ class Profiles extends StatelessWidget {
             ),
           ),
           const SizedBox(height: 8),
-          const Divider(thickness: 2),
+          const Divider(thickness: 2, color: Colors.black),
           const SizedBox(height: 8),
           ProfileCard(
             imagePath: 'assets/profiles/hutao.jpg',
@@ -53,7 +54,7 @@ class Profiles extends StatelessWidget {
           ),
         ],
       ),
-    );
+    ));
   }
 }
 
@@ -73,7 +74,8 @@ class ProfileCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Card(
+    return SafeArea(
+        child: Card(
       margin: const EdgeInsets.symmetric(vertical: 8),
       child: Padding(
         padding: const EdgeInsets.all(12.0),
@@ -97,6 +99,6 @@ class ProfileCard extends StatelessWidget {
           ],
         ),
       ),
-    );
+    ));
   }
 }

@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+//import 'package:tpm_teori_t2/regist.dart';
 import 'package:tpm_teori_t2/login.dart';
+//import 'package:tpm_teori_t2/screens/bottom_navbar.dart';
 
 void main() {
   runApp(const MyApp());
@@ -16,6 +18,7 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
       ),
       home: Login(),
+      //home: const MainScreen(),
     );
   }
 }

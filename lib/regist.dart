@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-class Login extends StatelessWidget {
-  const Login({super.key});
+class Regist extends StatelessWidget {
+  const Regist({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -55,6 +55,25 @@ class Login extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
+        Text('Fullname', style: TextStyle(color: Color(0xFF03396C))),
+        TextField(
+          decoration: InputDecoration(
+              enabledBorder: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(8),
+                  borderSide: BorderSide(
+                    color: Color(0xFF03396C),
+                    width: 1,
+                  )),
+              focusedBorder: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(8),
+                  borderSide: BorderSide(
+                    color: Color(0xFF03396C),
+                    width: 2,
+                  ))),
+        ),
+        SizedBox(
+          height: 20,
+        ),
         Text('Email Address', style: TextStyle(color: Color(0xFF03396C))),
         TextField(
           decoration: InputDecoration(
@@ -107,7 +126,7 @@ class Login extends StatelessWidget {
             backgroundColor: Color(0xFF005B96),
           ),
           onPressed: () {},
-          child: Text('LOGIN',
+          child: Text('REGISTER',
               style: TextStyle(
                   fontSize: 20,
                   fontWeight: FontWeight.bold,
@@ -116,11 +135,11 @@ class Login extends StatelessWidget {
         Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Text('Don’t have account?'),
+            Text('Already have account?'),
             TextButton(
                 onPressed: () {},
                 child: Text(
-                  'Register here!',
+                  'Login here!',
                   style: TextStyle(color: Colors.blue),
                 ))
           ],
