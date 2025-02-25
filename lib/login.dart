@@ -18,8 +18,9 @@ class _LoginState extends State<Login> {
   bool isLoginTrue = false;
   final db = DatabaseHelper();
 
-  login() {
-    var response = db.login(Users(email: email.text, password: password.text));
+  login() async {
+    var response =
+        await db.login(Users(email: email.text, password: password.text));
     if (response == true) {
       if (!mounted) return;
       Navigator.pushReplacement(

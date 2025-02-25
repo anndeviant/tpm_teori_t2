@@ -5,7 +5,7 @@ import 'user.dart';
 class DatabaseHelper {
   final databaseName = "calc.db";
   String users =
-      "CREATE TABLE users( userId INTEGER PRIMARY KEY AUTOINCREMENT, fullname TEXT NOT NULL, email TEXT NOT NULL UNIQUE, password TEXT NOT NULL)";
+      "create table users( userId INTEGER PRIMARY KEY AUTOINCREMENT, fullname TEXT, email TEXT UNIQUE, password TEXT)";
 
   Future<Database> initDB() async {
     final databasePath = await getDatabasesPath();
@@ -22,10 +22,9 @@ class DatabaseHelper {
 
   // Login Method
   Future<bool> login(Users user) async {
-    final db = await initDB();
+    final Database db = await initDB();
     var result = await db.rawQuery(
-      "SELECT * FROM users WHERE email = '${user.email}' AND password = '${user.password}'",
-    );
+        "SELECT * FROM users WHERE email = '${user.email}' AND password = '${user.password}'");
 
     if (result.isNotEmpty) {
       return true;
@@ -35,7 +34,8 @@ class DatabaseHelper {
   }
 
   Future<int> regist(Users user) async {
-    final db = await initDB();
-    return await db.insert("users", user.toMap());
+    final Database db = await initDB();
+
+    return db.insert("users", user.toMap());
   }
 }
