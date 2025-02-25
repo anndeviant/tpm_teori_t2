@@ -25,12 +25,15 @@ class MainScreenState extends State<MainScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return SafeArea(
+        child: Scaffold(
+      backgroundColor: Color(0xFFFFF9EF),
       body: IndexedStack(
         index: _selectedIndex,
         children: _pages,
       ),
       bottomNavigationBar: BottomNavigationBar(
+        backgroundColor: Color(0xFFFFF9EF),
         currentIndex: _selectedIndex,
         onTap: _onItemTapped,
         selectedItemColor: Colors.deepPurple,
@@ -50,6 +53,6 @@ class MainScreenState extends State<MainScreen> {
           ),
         ],
       ),
-    );
+    ));
   }
 }
