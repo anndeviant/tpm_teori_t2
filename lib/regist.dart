@@ -1,7 +1,19 @@
 import 'package:flutter/material.dart';
+import 'package:tpm_teori_t2/login.dart';
 
-class Regist extends StatelessWidget {
+class Regist extends StatefulWidget {
   const Regist({super.key});
+
+  @override
+  State<Regist> createState() => _RegistState();
+}
+
+class _RegistState extends State<Regist> {
+  final fullname = TextEditingController();
+  final email = TextEditingController();
+  final password = TextEditingController();
+
+  final formKey = GlobalKey<FormState>();
 
   @override
   Widget build(BuildContext context) {
@@ -52,69 +64,131 @@ class Regist extends StatelessWidget {
   }
 
   _inputfield(context) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.stretch,
-      children: [
-        Text('Fullname', style: TextStyle(color: Color(0xFF03396C))),
-        TextField(
-          decoration: InputDecoration(
-              enabledBorder: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(8),
-                  borderSide: BorderSide(
-                    color: Color(0xFF03396C),
-                    width: 1,
+    return Form(
+        key: formKey,
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: [
+            Text('Fullname', style: TextStyle(color: Color(0xFF03396C))),
+            TextFormField(
+              validator: (value) {
+                if (value!.isEmpty) {
+                  return "fullname is required";
+                }
+                return null;
+              },
+              decoration: InputDecoration(
+                  enabledBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(8),
+                      borderSide: BorderSide(
+                        color: Color(0xFF03396C),
+                        width: 1,
+                      )),
+                  focusedBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(8),
+                      borderSide: BorderSide(
+                        color: Color(0xFF03396C),
+                        width: 2,
+                      )),
+                  errorBorder: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(8),
+                    borderSide: BorderSide(
+                      color: Colors.red, // Sama dengan warna normal
+                      width: 1,
+                    ),
+                  ),
+                  focusedErrorBorder: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(8),
+                    borderSide: BorderSide(
+                      color: Colors.red, // Sama dengan warna fokus
+                      width: 2,
+                    ),
                   )),
-              focusedBorder: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(8),
-                  borderSide: BorderSide(
-                    color: Color(0xFF03396C),
-                    width: 2,
-                  ))),
-        ),
-        SizedBox(
-          height: 20,
-        ),
-        Text('Email Address', style: TextStyle(color: Color(0xFF03396C))),
-        TextField(
-          decoration: InputDecoration(
-              enabledBorder: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(8),
-                  borderSide: BorderSide(
-                    color: Color(0xFF03396C),
-                    width: 1,
+            ),
+            SizedBox(
+              height: 20,
+            ),
+            Text('Email Address', style: TextStyle(color: Color(0xFF03396C))),
+            TextFormField(
+              validator: (value) {
+                if (value!.isEmpty) {
+                  return "email is required";
+                }
+                return null;
+              },
+              decoration: InputDecoration(
+                  enabledBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(8),
+                      borderSide: BorderSide(
+                        color: Color(0xFF03396C),
+                        width: 1,
+                      )),
+                  focusedBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(8),
+                      borderSide: BorderSide(
+                        color: Color(0xFF03396C),
+                        width: 2,
+                      )),
+                  errorBorder: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(8),
+                    borderSide: BorderSide(
+                      color: Colors.red, // Sama dengan warna normal
+                      width: 1,
+                    ),
+                  ),
+                  focusedErrorBorder: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(8),
+                    borderSide: BorderSide(
+                      color: Colors.red, // Sama dengan warna fokus
+                      width: 2,
+                    ),
                   )),
-              focusedBorder: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(8),
-                  borderSide: BorderSide(
-                    color: Color(0xFF03396C),
-                    width: 2,
-                  ))),
-        ),
-        SizedBox(
-          height: 20,
-        ),
-        Text('Password', style: TextStyle(color: Color(0xFF03396C))),
-        TextField(
-          decoration: InputDecoration(
-              enabledBorder: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(8),
-                  borderSide: BorderSide(
-                    color: Color(0xFF03396C),
-                    width: 1,
+            ),
+            SizedBox(
+              height: 20,
+            ),
+            Text('Password', style: TextStyle(color: Color(0xFF03396C))),
+            TextFormField(
+              validator: (value) {
+                if (value!.isEmpty) {
+                  return "password is required";
+                }
+                return null;
+              },
+              decoration: InputDecoration(
+                  enabledBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(8),
+                      borderSide: BorderSide(
+                        color: Color(0xFF03396C),
+                        width: 1,
+                      )),
+                  focusedBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(8),
+                      borderSide: BorderSide(
+                        color: Color(0xFF03396C),
+                        width: 2,
+                      )),
+                  errorBorder: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(8),
+                    borderSide: BorderSide(
+                      color: Colors.red, // Sama dengan warna normal
+                      width: 1,
+                    ),
+                  ),
+                  focusedErrorBorder: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(8),
+                    borderSide: BorderSide(
+                      color: Colors.red, // Sama dengan warna fokus
+                      width: 2,
+                    ),
                   )),
-              focusedBorder: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(8),
-                  borderSide: BorderSide(
-                    color: Color(0xFF03396C),
-                    width: 2,
-                  ))),
-          obscureText: true,
-        ),
-        SizedBox(
-          height: 40,
-        ),
-      ],
-    );
+              obscureText: true,
+            ),
+            SizedBox(
+              height: 40,
+            ),
+          ],
+        ));
   }
 
   _btn(context) {
@@ -125,7 +199,11 @@ class Regist extends StatelessWidget {
             padding: EdgeInsets.symmetric(vertical: 15, horizontal: 100),
             backgroundColor: Color(0xFF005B96),
           ),
-          onPressed: () {},
+          onPressed: () {
+            if (formKey.currentState!.validate()) {
+              //fungsi submit
+            }
+          },
           child: Text('REGISTER',
               style: TextStyle(
                   fontSize: 20,
@@ -137,7 +215,10 @@ class Regist extends StatelessWidget {
           children: [
             Text('Already have account?'),
             TextButton(
-                onPressed: () {},
+                onPressed: () {
+                  Navigator.push(context,
+                      MaterialPageRoute(builder: (context) => const Login()));
+                },
                 child: Text(
                   'Login here!',
                   style: TextStyle(color: Colors.blue),
