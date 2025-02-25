@@ -214,8 +214,8 @@ class _RegistState extends State<Regist> {
                       email: email.text,
                       password: password.text))
                   .whenComplete(() {
-                Navigator.pushReplacement(
-                    context, MaterialPageRoute(builder: (context) =>const Login()));
+                Navigator.push(
+                    context, MaterialPageRoute(builder: (context) => Login()));
               });
             }
           },
