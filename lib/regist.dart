@@ -231,7 +231,7 @@ class _RegistState extends State<Regist> {
             Text('Already have account?'),
             TextButton(
                 onPressed: () {
-                  Navigator.push(context,
+                  Navigator.pushReplacement(context,
                       MaterialPageRoute(builder: (context) => const Login()));
                 },
                 child: Text(
