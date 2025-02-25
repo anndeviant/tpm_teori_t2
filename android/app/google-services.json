@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "146772430217",
+    "project_id": "calc-app-1b75f",
+    "storage_bucket": "calc-app-1b75f.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:146772430217:android:c9bb99c0579a9d56cda558",
+        "android_client_info": {
+          "package_name": "com.example.tpm_teori_t2"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD-MVmSirQAAr0XcNQUABypwf1QoBb0QIY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'profiles.dart';
 import 'calculate.dart';
@@ -11,6 +12,11 @@ class MainScreen extends StatefulWidget {
 
 class MainScreenState extends State<MainScreen> {
   int _selectedIndex = 0;
+  final user = FirebaseAuth.instance.currentUser;
+
+  signOut() async {
+    await FirebaseAuth.instance.signOut();
+  }
 
   final List<Widget> _pages = [
     const Profiles(),
@@ -18,9 +24,13 @@ class MainScreenState extends State<MainScreen> {
   ];
 
   void _onItemTapped(int index) {
-    setState(() {
-      _selectedIndex = index;
-    });
+    if (index == 2) {
+      signOut();
+    } else {
+      setState(() {
+        _selectedIndex = index;
+      });
+    }
   }
 
   @override
