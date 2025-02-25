@@ -11,8 +11,10 @@ class CalculatePageState extends State<CalculatePage> {
   final TextEditingController _num1Controller = TextEditingController();
   final TextEditingController _num2Controller = TextEditingController();
   final TextEditingController _oddEvenController = TextEditingController();
+  final TextEditingController _wordCounterController = TextEditingController();
   double? _result;
   String? _oddEvenResult;
+  int? _wordCountResult;
 
   void _calculate(String operation) {
     final double num1 = double.tryParse(_num1Controller.text) ?? 0;
@@ -42,6 +44,13 @@ class CalculatePageState extends State<CalculatePage> {
     });
   }
 
+  void _countChars() {
+    final String text = _wordCounterController.text;
+    setState(() {
+      _wordCountResult = text.length;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -59,7 +68,7 @@ class CalculatePageState extends State<CalculatePage> {
                   const SizedBox(height: 8),
                   Center(
                     child: Image.asset(
-                      'assets/profiles/hutao.jpg',
+                      'assets/profiles/kalk.jpg',
                       height: 160,
                       width: double.infinity,
                       fit: BoxFit.cover,
@@ -150,6 +159,41 @@ class CalculatePageState extends State<CalculatePage> {
                       ),
                       Text(
                         _oddEvenResult != null ? '$_oddEvenResult' : '[Empty]',
+                        style: const TextStyle(
+                            fontSize: 18, fontWeight: FontWeight.bold),
+                      ),
+                    ],
+                  ),
+                  const SizedBox(height: 8),
+                  const Divider(thickness: 2),
+                  const SizedBox(height: 8),
+                  const Text('Char Counter',
+                      style:
+                          TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
+                  TextField(
+                    controller: _wordCounterController,
+                    decoration: const InputDecoration(labelText: 'Enter text'),
+                  ),
+                  const SizedBox(height: 16),
+                  Center(
+                    child: ElevatedButton(
+                      onPressed: _countChars,
+                      child: const Text('Count Char'),
+                    ),
+                  ),
+                  const SizedBox(height: 16),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      const Text(
+                        'Char Count:',
+                        style: TextStyle(
+                            fontSize: 18, fontWeight: FontWeight.bold),
+                      ),
+                      Text(
+                        _wordCountResult != null
+                            ? '$_wordCountResult'
+                            : '[Empty]',
                         style: const TextStyle(
                             fontSize: 18, fontWeight: FontWeight.bold),
                       ),

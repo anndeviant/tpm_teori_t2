@@ -1,8 +1,39 @@
 import 'package:flutter/material.dart';
+import 'package:tpm_teori_t2/regist.dart';
+import 'package:tpm_teori_t2/screens/bottom_navbar.dart';
+import 'package:tpm_teori_t2/sqlite.dart';
+import 'package:tpm_teori_t2/user.dart';
 
-class Login extends StatelessWidget {
+class Login extends StatefulWidget {
   const Login({super.key});
 
+  @override
+  State<Login> createState() => _LoginState();
+}
+
+class _LoginState extends State<Login> {
+  final email = TextEditingController();
+  final password = TextEditingController();
+
+  bool isLoginTrue = false;
+  final db = DatabaseHelper();
+
+  login() async {
+    var response =
+        await db.login(Users(email: email.text, password: password.text));
+    if (response == true) {
+      if (!mounted) return;
+      Navigator.pushReplacement(
+          context, MaterialPageRoute(builder: (context) => const MainScreen()));
+    } else {
+      setState(() {
+        isLoginTrue = true;
+      });
+    }
+  }
+
+  //global key
+  final formKey = GlobalKey<FormState>();
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -18,6 +49,10 @@ class Login extends StatelessWidget {
                     _header(context),
                     _inputfield(context),
                     _btn(context),
+                    isLoginTrue
+                        ? const Text("Email or Password is incorrect",
+                            style: TextStyle(color: Colors.red))
+                        : const SizedBox()
                   ],
                 ),
               ),
@@ -52,50 +87,95 @@ class Login extends StatelessWidget {
   }
 
   _inputfield(context) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.stretch,
-      children: [
-        Text('Email Address', style: TextStyle(color: Color(0xFF03396C))),
-        TextField(
-          decoration: InputDecoration(
-              enabledBorder: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(8),
-                  borderSide: BorderSide(
-                    color: Color(0xFF03396C),
-                    width: 1,
+    return Form(
+        key: formKey,
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: [
+            Text('Email Address', style: TextStyle(color: Color(0xFF03396C))),
+            TextFormField(
+              controller: email,
+              validator: (value) {
+                if (value!.isEmpty) {
+                  return "email is required";
+                }
+                return null;
+              },
+              decoration: InputDecoration(
+                  enabledBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(8),
+                      borderSide: BorderSide(
+                        color: Color(0xFF03396C),
+                        width: 1,
+                      )),
+                  focusedBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(8),
+                      borderSide: BorderSide(
+                        color: Color(0xFF03396C),
+                        width: 2,
+                      )),
+                  errorBorder: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(8),
+                    borderSide: BorderSide(
+                      color: Colors.red, // Sama dengan warna normal
+                      width: 1,
+                    ),
+                  ),
+                  focusedErrorBorder: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(8),
+                    borderSide: BorderSide(
+                      color: Colors.red, // Sama dengan warna fokus
+                      width: 2,
+                    ),
                   )),
-              focusedBorder: OutlineInputBorder(
+            ),
+            SizedBox(
+              height: 20,
+            ),
+            Text('Password', style: TextStyle(color: Color(0xFF03396C))),
+            TextFormField(
+              controller: password,
+              validator: (value) {
+                if (value!.isEmpty) {
+                  return "password is required";
+                }
+                return null;
+              },
+              decoration: InputDecoration(
+                enabledBorder: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(8),
+                    borderSide: BorderSide(
+                      color: Color(0xFF03396C),
+                      width: 1,
+                    )),
+                focusedBorder: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(8),
+                    borderSide: BorderSide(
+                      color: Color(0xFF03396C),
+                      width: 2,
+                    )),
+                errorBorder: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(8),
                   borderSide: BorderSide(
-                    color: Color(0xFF03396C),
-                    width: 2,
-                  ))),
-        ),
-        SizedBox(
-          height: 20,
-        ),
-        Text('Password', style: TextStyle(color: Color(0xFF03396C))),
-        TextField(
-          decoration: InputDecoration(
-              enabledBorder: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(8),
-                  borderSide: BorderSide(
-                    color: Color(0xFF03396C),
+                    color: Colors.red, // Sama dengan warna normal
                     width: 1,
-                  )),
-              focusedBorder: OutlineInputBorder(
+                  ),
+                ),
+                focusedErrorBorder: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(8),
                   borderSide: BorderSide(
-                    color: Color(0xFF03396C),
+                    color: Colors.red, // Sama dengan warna fokus
                     width: 2,
-                  ))),
-          obscureText: true,
-        ),
-        SizedBox(
-          height: 40,
-        ),
-      ],
-    );
+                  ),
+                ),
+              ),
+              obscureText: true,
+            ),
+            SizedBox(
+              height: 40,
+            ),
+          ],
+        ));
   }
 
   _btn(context) {
@@ -106,7 +186,12 @@ class Login extends StatelessWidget {
             padding: EdgeInsets.symmetric(vertical: 15, horizontal: 100),
             backgroundColor: Color(0xFF005B96),
           ),
-          onPressed: () {},
+          onPressed: () {
+            if (formKey.currentState!.validate()) {
+              //fungsi submit
+              login();
+            }
+          },
           child: Text('LOGIN',
               style: TextStyle(
                   fontSize: 20,
@@ -118,7 +203,10 @@ class Login extends StatelessWidget {
           children: [
             Text('Don’t have account?'),
             TextButton(
-                onPressed: () {},
+                onPressed: () {
+                  Navigator.push(context,
+                      MaterialPageRoute(builder: (context) => const Regist()));
+                },
                 child: Text(
                   'Register here!',
                   style: TextStyle(color: Colors.blue),

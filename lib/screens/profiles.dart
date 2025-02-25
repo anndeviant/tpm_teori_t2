@@ -6,7 +6,7 @@ class Profiles extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SafeArea(
-        child: Padding(
+        child: SingleChildScrollView(
       padding: const EdgeInsets.all(16.0),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -19,7 +19,7 @@ class Profiles extends StatelessWidget {
           const SizedBox(height: 8),
           Center(
             child: Image.asset(
-              'assets/profiles/hutao.jpg',
+              'assets/profiles/bareng1.jpg',
               height: 160,
               width: double.infinity,
               fit: BoxFit.cover,
@@ -29,25 +29,25 @@ class Profiles extends StatelessWidget {
           const Divider(thickness: 2, color: Colors.black),
           const SizedBox(height: 8),
           ProfileCard(
-            imagePath: 'assets/profiles/hutao.jpg',
+            imagePath: 'assets/profiles/annas.jpg',
             name: 'Annas Sovianto',
             nim: '123220045',
             otherInfo: 'Other info 1',
           ),
           ProfileCard(
-            imagePath: 'assets/profiles/hutao.jpg',
+            imagePath: 'assets/profiles/galang.jpg',
             name: 'Galang Rakha Ahnanta',
             nim: '123220047',
             otherInfo: 'Other info 2',
           ),
           ProfileCard(
-            imagePath: 'assets/profiles/hutao.jpg',
+            imagePath: 'assets/profiles/ade.jpg',
             name: 'Arya Ade Wiguna',
             nim: '123220058',
             otherInfo: 'Other info 3',
           ),
           ProfileCard(
-            imagePath: 'assets/profiles/hutao.jpg',
+            imagePath: 'assets/profiles/lyan.jpg',
             name: 'Lyan Nandyan D S S',
             nim: '123220070',
             otherInfo: 'Other info 4',
