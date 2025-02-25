@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:tpm_teori_t2/regist.dart';
+import 'package:tpm_teori_t2/screens/bottom_navbar.dart';
+import 'package:tpm_teori_t2/sqlite.dart';
+import 'package:tpm_teori_t2/user.dart';
 
 class Login extends StatefulWidget {
   const Login({super.key});
@@ -11,6 +14,22 @@ class Login extends StatefulWidget {
 class _LoginState extends State<Login> {
   final email = TextEditingController();
   final password = TextEditingController();
+
+  bool isLoginTrue = false;
+  final db = DatabaseHelper();
+
+  login() {
+    var response = db.login(Users(email: email.text, password: password.text));
+    if (response == true) {
+      if (!mounted) return;
+      Navigator.pushReplacement(
+          context, MaterialPageRoute(builder: (context) => const MainScreen()));
+    } else {
+      setState(() {
+        isLoginTrue = true;
+      });
+    }
+  }
 
   //global key
   final formKey = GlobalKey<FormState>();
@@ -29,6 +48,10 @@ class _LoginState extends State<Login> {
                     _header(context),
                     _inputfield(context),
                     _btn(context),
+                    isLoginTrue
+                        ? const Text("Email or Password is incorrect",
+                            style: TextStyle(color: Colors.red))
+                        : const SizedBox()
                   ],
                 ),
               ),
@@ -70,6 +93,7 @@ class _LoginState extends State<Login> {
           children: [
             Text('Email Address', style: TextStyle(color: Color(0xFF03396C))),
             TextFormField(
+              controller: email,
               validator: (value) {
                 if (value!.isEmpty) {
                   return "email is required";
@@ -109,6 +133,7 @@ class _LoginState extends State<Login> {
             ),
             Text('Password', style: TextStyle(color: Color(0xFF03396C))),
             TextFormField(
+              controller: password,
               validator: (value) {
                 if (value!.isEmpty) {
                   return "password is required";
@@ -163,6 +188,7 @@ class _LoginState extends State<Login> {
           onPressed: () {
             if (formKey.currentState!.validate()) {
               //fungsi submit
+              login();
             }
           },
           child: Text('LOGIN',

@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:tpm_teori_t2/login.dart';
+import 'package:tpm_teori_t2/sqlite.dart';
+import 'package:tpm_teori_t2/user.dart';
 
 class Regist extends StatefulWidget {
   const Regist({super.key});
@@ -71,6 +73,7 @@ class _RegistState extends State<Regist> {
           children: [
             Text('Fullname', style: TextStyle(color: Color(0xFF03396C))),
             TextFormField(
+              controller: fullname,
               validator: (value) {
                 if (value!.isEmpty) {
                   return "fullname is required";
@@ -110,6 +113,7 @@ class _RegistState extends State<Regist> {
             ),
             Text('Email Address', style: TextStyle(color: Color(0xFF03396C))),
             TextFormField(
+              controller: email,
               validator: (value) {
                 if (value!.isEmpty) {
                   return "email is required";
@@ -149,6 +153,7 @@ class _RegistState extends State<Regist> {
             ),
             Text('Password', style: TextStyle(color: Color(0xFF03396C))),
             TextFormField(
+              controller: password,
               validator: (value) {
                 if (value!.isEmpty) {
                   return "password is required";
@@ -202,6 +207,16 @@ class _RegistState extends State<Regist> {
           onPressed: () {
             if (formKey.currentState!.validate()) {
               //fungsi submit
+              final db = DatabaseHelper();
+              db
+                  .regist(Users(
+                      fullname: fullname.text,
+                      email: email.text,
+                      password: password.text))
+                  .whenComplete(() {
+                Navigator.push(
+                    context, MaterialPageRoute(builder: (context) => Login()));
+              });
             }
           },
           child: Text('REGISTER',
