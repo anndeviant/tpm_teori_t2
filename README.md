@@ -1,6 +1,6 @@
 # tpm_teori_t2
 
-A new Flutter project.
+A new Flutter project. NakaTachi
 
 ## Getting Started
 
