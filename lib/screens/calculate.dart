@@ -16,9 +16,35 @@ class CalculatePageState extends State<CalculatePage> {
   String? _oddEvenResult;
   int? _wordCountResult;
 
+  void _showErrorDialog(String message) {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: const Text('Error!'),
+          content: Text(message),
+          actions: <Widget>[
+            TextButton(
+              child: const Text('OK'),
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+            ),
+          ],
+        );
+      },
+    );
+  }
+
   void _calculate(String operation) {
-    final double num1 = double.tryParse(_num1Controller.text) ?? 0;
-    final double num2 = double.tryParse(_num2Controller.text) ?? 0;
+    final double? num1 = double.tryParse(_num1Controller.text);
+    final double? num2 = double.tryParse(_num2Controller.text);
+
+    if (num1 == null || num2 == null) {
+      _showErrorDialog('Input harus angka');
+      return;
+    }
+
     setState(() {
       switch (operation) {
         case '+':
@@ -38,7 +64,13 @@ class CalculatePageState extends State<CalculatePage> {
   }
 
   void _checkOddEven() {
-    final int number = int.tryParse(_oddEvenController.text) ?? 0;
+    final int? number = int.tryParse(_oddEvenController.text);
+
+    if (number == null) {
+      _showErrorDialog('Input harus angka');
+      return;
+    }
+
     setState(() {
       _oddEvenResult = (number % 2 == 0) ? 'Genap' : 'Ganjil';
     });
